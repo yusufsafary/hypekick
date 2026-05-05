@@ -3,264 +3,586 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HypeKick — Brutal Website Reviews</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>HypeKick — Your site has blind spots. We don't.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0c0c0b;--surface:#131311;--surface2:#1c1c19;--border:#2a2a26;--border2:#3a3a35;--text:#f0ede4;--muted:#888580;--accent:#ff4500;--accent-soft:#ff450015;--accent-border:#ff450040;--green:#22c55e;--amber:#f59e0b;--red:#ef4444}
+:root{
+  --bg:#0a0a0a;
+  --surface:#111111;
+  --surface2:#1a1a1a;
+  --border:#222222;
+  --border2:#2e2e2e;
+  --text:#ffffff;
+  --muted:#666666;
+  --muted2:#444444;
+  --accent:#f0ff00;
+  --accent-dark:#c8d600;
+}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;min-height:100vh;overflow-x:hidden}
-a{text-decoration:none}
-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:100}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--text)}
-.logo span{color:var(--accent)}
-.nav-pill{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:8px 18px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s}
-.nav-pill:hover{border-color:var(--border2);color:var(--text)}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;height:60px;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--bg);z-index:100;
+}
+.logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.5px}
+.logo-kick{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-link{color:var(--muted);font-size:14px;padding:6px 14px;border-radius:6px;transition:color 0.15s,background 0.15s;font-weight:500}
+.nav-link:hover{color:var(--text);background:var(--surface)}
+.nav-cta{background:var(--accent);color:#000;padding:7px 16px;border-radius:6px;font-size:14px;font-weight:600;transition:opacity 0.15s;cursor:pointer;border:none;font-family:'Inter',sans-serif}
+.nav-cta:hover{opacity:0.88}
 
 /* HERO */
-.hero{max-width:820px;margin:0 auto;padding:100px 40px 60px;text-align:center}
-.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent);font-size:12px;font-weight:500;padding:5px 14px;border-radius:100px;margin-bottom:28px}
-.badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(40px,7vw,78px);line-height:1.0;letter-spacing:-2px;margin-bottom:20px}
-h1 em{font-style:normal;color:var(--accent)}
-.hero-sub{font-size:17px;color:var(--muted);max-width:460px;margin:0 auto 48px;line-height:1.7;font-weight:300}
-.input-wrap{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:6px 6px 6px 20px;display:flex;align-items:center;gap:8px;max-width:600px;margin:0 auto 14px;transition:border-color 0.2s}
-.input-wrap:focus-within{border-color:var(--accent)}
-.url-pfx{color:var(--muted);font-size:14px;flex-shrink:0}
-#url-input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:15px;font-family:'DM Sans',sans-serif;padding:8px 0}
-#url-input::placeholder{color:var(--muted)}
-.kick-btn{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:12px 22px;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;flex-shrink:0;transition:opacity 0.15s,transform 0.1s}
-.kick-btn:hover{opacity:0.88}
-.kick-btn:active{transform:scale(0.97)}
-.kick-btn:disabled{opacity:0.45;cursor:not-allowed}
-.hint{font-size:12px;color:var(--muted);text-align:center}
-.proof{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:48px;padding-top:36px;border-top:1px solid var(--border);flex-wrap:wrap}
-.proof-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
-.proof-num{font-family:'Syne',sans-serif;font-weight:700;color:var(--text);font-size:15px}
-.proof-sep{width:1px;height:18px;background:var(--border)}
+.hero{
+  max-width:900px;margin:0 auto;
+  padding:96px 40px 72px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border2);
+  color:var(--muted);font-size:12px;font-weight:500;
+  padding:4px 12px;border-radius:4px;margin-bottom:36px;
+  letter-spacing:0.2px;
+}
+.tag-dot{width:5px;height:5px;background:var(--accent);border-radius:50%}
+h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;
+  font-size:clamp(44px,6.5vw,82px);
+  line-height:1.0;
+  letter-spacing:-3px;
+  margin-bottom:24px;
+}
+h1 .hl{color:var(--accent)}
+.hero-desc{
+  font-size:16px;color:var(--muted);
+  max-width:480px;line-height:1.75;
+  margin-bottom:40px;font-weight:400;
+}
+.input-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:6px 6px 6px 16px;
+  max-width:580px;
+  margin-bottom:14px;
+  transition:border-color 0.2s;
+}
+.input-row:focus-within{border-color:#444}
+.url-pfx{font-size:13px;color:var(--muted2);flex-shrink:0;font-weight:500}
+#url-input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--text);font-size:15px;font-family:'Inter',sans-serif;
+  padding:8px 0;min-width:0;
+}
+#url-input::placeholder{color:var(--muted2)}
+.scan-btn{
+  background:var(--accent);color:#000;border:none;
+  border-radius:7px;padding:10px 20px;
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:700;font-size:14px;cursor:pointer;
+  white-space:nowrap;flex-shrink:0;
+  transition:opacity 0.15s,transform 0.1s;
+  letter-spacing:-0.2px;
+}
+.scan-btn:hover{opacity:0.88}
+.scan-btn:active{transform:scale(0.97)}
+.scan-btn:disabled{opacity:0.4;cursor:not-allowed}
+.input-meta{font-size:12px;color:var(--muted2);display:flex;align-items:center;gap:16px}
+.input-meta span{display:flex;align-items:center;gap:5px}
+
+/* STATS BAR */
+.stats-bar{
+  display:flex;align-items:stretch;
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  max-width:580px;
+  margin-top:48px;
+}
+.stat{
+  flex:1;padding:18px 20px;
+  border-right:1px solid var(--border);
+}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;letter-spacing:-1px;margin-bottom:2px}
+.stat-l{font-size:12px;color:var(--muted);font-weight:400}
+
+/* MARQUEE */
+.marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;margin-top:0;white-space:nowrap}
+.marquee-track{display:inline-block;animation:scroll 22s linear infinite}
+.marquee-item{display:inline-block;padding:0 32px;font-size:13px;color:var(--muted);font-weight:500;letter-spacing:0.2px}
+.marquee-dot{color:var(--accent);margin-right:32px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* LOADING */
-#loading{display:none;max-width:560px;margin:60px auto;text-align:center;padding:0 40px}
-.loader-ring{width:44px;height:44px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.75s linear infinite;margin:0 auto 20px}
+#loading{display:none;max-width:520px;margin:72px auto;padding:0 40px;text-align:center}
+.spin-ring{width:40px;height:40px;border:1.5px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 24px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loader-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:6px}
-.loader-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
-.step-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);padding:9px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;text-align:left;transition:all 0.3s}
-.step-item.active{color:var(--text);border-color:var(--accent-border);background:var(--accent-soft)}
-.step-item.done{color:var(--green)}
-.sdot{width:6px;height:6px;border-radius:50%;background:var(--border2);flex-shrink:0;transition:background 0.3s}
-.step-item.active .sdot{background:var(--accent)}
-.step-item.done .sdot{background:var(--green)}
+.load-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.5px;margin-bottom:6px}
+.load-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
+.step-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:13px;color:var(--muted);text-align:left;transition:all 0.25s}
+.step-row.on{color:var(--text);border-color:#333;background:var(--surface)}
+.step-row.ok{color:var(--accent)}
+.sdot{width:5px;height:5px;border-radius:50%;background:var(--muted2);flex-shrink:0;transition:background 0.25s}
+.step-row.on .sdot{background:var(--accent)}
+.step-row.ok .sdot{background:var(--accent)}
 
 /* RESULTS */
-#results{display:none;max-width:740px;margin:0 auto;padding:0 40px 80px}
-.res-header{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
-.res-url{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:5px}
-.res-url a{color:var(--accent);font-weight:500}
-.verdict-h{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,4vw,34px);letter-spacing:-1px;line-height:1.1;margin-bottom:10px}
-.verdict-s{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300}
+#results{display:none;max-width:720px;margin:0 auto;padding:0 40px 100px}
 
-.overall-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:24px}
-.overall-n{font-family:'Syne',sans-serif;font-weight:800;font-size:54px;line-height:1;flex-shrink:0}
-.overall-meta{flex:1}
-.overall-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px}
-.overall-txt{font-size:13px;color:var(--muted);line-height:1.6;margin-top:8px}
-.bar-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:4px}
-.bar-fill{height:100%;border-radius:2px;transition:width 1s cubic-bezier(0.4,0,0.2,1)}
+.res-eyebrow{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.res-eyebrow a{color:var(--accent);font-weight:600}
+.res-h{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(26px,4vw,42px);letter-spacing:-1.5px;line-height:1.05;margin-bottom:12px}
+.res-sub{font-size:14px;color:var(--muted);line-height:1.75;max-width:560px;margin-bottom:32px}
 
-.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-bottom:20px}
-.score-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
-.sc-lbl{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:10px}
-.sc-val{font-family:'Syne',sans-serif;font-weight:800;font-size:34px;line-height:1;margin-bottom:8px}
-.sc-val span{font-size:14px;opacity:0.45}
+/* OVERALL */
+.overall{
+  border:1px solid var(--border2);border-radius:10px;
+  padding:24px 28px;margin-bottom:16px;
+  display:flex;align-items:flex-start;gap:28px;
+}
+.ov-score{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:64px;letter-spacing:-3px;line-height:1;flex-shrink:0}
+.ov-right{flex:1;min-width:0}
+.ov-label{font-size:11px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ov-bar{height:2px;background:var(--border2);border-radius:1px;margin-bottom:10px;overflow:hidden}
+.ov-fill{height:100%;border-radius:1px;transition:width 1.1s cubic-bezier(0.4,0,0.2,1)}
+.ov-desc{font-size:13px;color:var(--muted);line-height:1.65}
 
-.sec{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:10px}
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.sec-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px}
-.sec-score{font-family:'Syne',sans-serif;font-weight:700;font-size:17px}
-.sec-body{font-size:14px;color:var(--muted);line-height:1.7}
+/* SCORE CARDS */
+.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+@media(max-width:640px){.score-grid{grid-template-columns:repeat(2,1fr)}}
+.sc{border:1px solid var(--border);border-radius:10px;padding:16px 16px 14px;background:var(--surface)}
+.sc-lbl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:8px}
+.sc-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:36px;letter-spacing:-1.5px;line-height:1;margin-bottom:6px}
+.sc-ten{font-size:14px;font-weight:400;opacity:0.35}
+.sc-bar{height:2px;background:var(--border2);border-radius:1px;overflow:hidden}
+.sc-fill{height:100%;border-radius:1px;transition:width 1s cubic-bezier(0.4,0,0.2,1) 0.1s}
 
-.fixes-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px;margin-top:20px}
-.fix-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;font-size:14px;line-height:1.5}
-.fix-n{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:4px;padding:2px 7px;flex-shrink:0;margin-top:1px}
+/* SECTIONS */
+.section-block{border:1px solid var(--border);border-radius:10px;padding:20px 22px;margin-bottom:8px;background:var(--surface)}
+.sb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sb-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;letter-spacing:-0.3px}
+.sb-score{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.5px}
+.sb-body{font-size:13px;color:var(--muted);line-height:1.75}
 
-.share-bar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:22px;border-top:1px solid var(--border)}
-.share-lbl{font-size:13px;color:var(--muted);flex:1}
-.share-btn{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color 0.2s}
-.share-btn:hover{border-color:var(--border2)}
-.rescan-btn{background:var(--accent);border:none;color:#fff;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.15s}
-.rescan-btn:hover{opacity:0.88}
+/* FIXES */
+.fixes-head{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin:24px 0 10px}
+.fix{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:13px;line-height:1.6;background:var(--surface)}
+.fix-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:11px;color:#000;background:var(--accent);border-radius:3px;padding:2px 6px;flex-shrink:0;margin-top:1px;letter-spacing:0.2px}
+
+/* BOTTOM BAR */
+.bottom-bar{display:flex;align-items:center;gap:8px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.bottom-label{font-size:13px;color:var(--muted);flex:1}
+.btn-ghost{background:var(--surface);border:1px solid var(--border2);color:var(--text);padding:8px 16px;border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color 0.15s}
+.btn-ghost:hover{border-color:#444}
+.btn-accent{background:var(--accent);border:none;color:#000;padding:8px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;transition:opacity 0.15s;letter-spacing:-0.2px}
+.btn-accent:hover{opacity:0.88}
 
 /* HOW */
-.how{border-top:1px solid var(--border);padding:80px 40px;max-width:820px;margin:0 auto}
-.how-lbl{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px;font-weight:500}
-.how-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(26px,4vw,42px);letter-spacing:-1px;margin-bottom:44px;line-height:1.1}
-.steps-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.step{background:var(--surface);padding:26px 22px}
-.step-n{font-family:'Syne',sans-serif;font-weight:800;font-size:30px;color:var(--accent);opacity:0.4;margin-bottom:10px}
-.step-t{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:6px}
-.step-d{font-size:13px;color:var(--muted);line-height:1.6}
+.how{border-top:1px solid var(--border);padding:80px 40px 72px;max-width:900px;margin:0 auto}
+.section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px}
+.how-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,4vw,48px);letter-spacing:-2px;line-height:1.05;margin-bottom:48px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+@media(max-width:640px){.steps{grid-template-columns:repeat(2,1fr)}}
+.step-card{padding:24px 20px;border-right:1px solid var(--border)}
+.step-card:last-child{border-right:none}
+@media(max-width:640px){.step-card:nth-child(2){border-right:none}.step-card:nth-child(3){border-top:1px solid var(--border)}.step-card:nth-child(4){border-top:1px solid var(--border);border-right:none}}
+.step-num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:28px;color:var(--accent);opacity:0.5;margin-bottom:14px;letter-spacing:-1px}
+.step-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;margin-bottom:8px;letter-spacing:-0.3px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.65}
 
-footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px}
-.footer-logo span{color:var(--accent)}
-.footer-copy{font-size:12px;color:var(--muted)}
+/* WHAT WE CHECK */
+.checks{border-top:1px solid var(--border);padding:72px 40px;max-width:900px;margin:0 auto}
+.checks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:48px}
+@media(max-width:600px){.checks-grid{grid-template-columns:1fr}}
+.check-card{border:1px solid var(--border);border-radius:10px;padding:22px;background:var(--surface)}
+.check-icon{font-size:18px;margin-bottom:14px}
+.check-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.4px;margin-bottom:8px}
+.check-desc{font-size:13px;color:var(--muted);line-height:1.7}
+.check-score-ex{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;color:var(--muted);border:1px solid var(--border2);border-radius:5px;padding:3px 10px}
+.ex-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14px}
 
-.c-green{color:var(--green)} .c-amber{color:var(--amber)} .c-red{color:var(--red)}
-.bg-green{background:var(--green)} .bg-amber{background:var(--amber)} .bg-red{background:var(--red)}
+/* TESTIMONIALS */
+.testi{border-top:1px solid var(--border);padding:72px 40px;max-width:900px;margin:0 auto}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:48px}
+@media(max-width:640px){.testi-grid{grid-template-columns:1fr}}
+.testi-card{border:1px solid var(--border);border-radius:10px;padding:20px 22px;background:var(--surface)}
+.testi-text{font-size:14px;line-height:1.7;margin-bottom:16px;color:#ccc}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-av{width:32px;height:32px;border-radius:50%;background:var(--border2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.testi-name{font-size:13px;font-weight:600}
+.testi-role{font-size:12px;color:var(--muted)}
+
+/* FAQ */
+.faq{border-top:1px solid var(--border);padding:72px 40px;max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0;cursor:pointer}
+.faq-q{display:flex;align-items:center;justify-content:space-between;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.3px;user-select:none}
+.faq-q .arrow{color:var(--muted);transition:transform 0.2s;font-style:normal;font-family:'Inter',sans-serif}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.75;max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s}
+.faq-item.open .faq-a{max-height:200px;padding-top:12px}
+.faq-item.open .arrow{transform:rotate(45deg)}
+
+/* CTA SECTION */
+.cta-section{border-top:1px solid var(--border);padding:80px 40px;text-align:center;max-width:900px;margin:0 auto}
+.cta-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,5vw,60px);letter-spacing:-2.5px;line-height:1.0;margin-bottom:16px}
+.cta-sub{font-size:15px;color:var(--muted);margin-bottom:36px;line-height:1.7}
+.cta-input-row{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:6px 6px 6px 16px;max-width:520px;margin:0 auto 12px;transition:border-color 0.2s}
+.cta-input-row:focus-within{border-color:#444}
+.cta-input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:15px;font-family:'Inter',sans-serif;padding:8px 0;min-width:0}
+.cta-input::placeholder{color:var(--muted2)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px}
+.footer-kick{color:var(--accent)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:13px;color:var(--muted);transition:color 0.15s}
+.footer-links a:hover{color:var(--text)}
+.footer-copy{font-size:12px;color:var(--muted2)}
+
+/* COLORS */
+.yellow{color:var(--accent)}
+.red{color:#ff4444}
+.orange{color:#ff8800}
+.green-c{color:#22c55e}
+.bg-yellow{background:var(--accent)}
+.bg-red{background:#ff4444}
+.bg-orange{background:#ff8800}
+.bg-green{background:#22c55e}
 
 @media(max-width:600px){
-  nav{padding:16px 20px}
-  .hero{padding:60px 20px 40px}
-  #results{padding:0 20px 60px}
-  .how{padding:60px 20px}
-  footer{padding:22px 20px}
-  .overall-card{flex-direction:column;gap:12px}
+  nav{padding:0 20px}
+  .hero{padding:60px 20px 48px}
+  .stats-bar{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+  #results{padding:0 20px 72px}
+  .how,.checks,.testi,.faq,.cta-section{padding-left:20px;padding-right:20px}
+  footer{padding:24px 20px;flex-direction:column;align-items:flex-start;gap:16px}
+  .overall{flex-direction:column;gap:16px}
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="logo">hype<span>kick</span></a>
-  <a href="#how" class="nav-pill">How it works</a>
+  <div class="logo">hype<span class="logo-kick">kick</span></div>
+  <div class="nav-links">
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#checks" class="nav-link">What we check</a>
+    <button class="nav-cta" onclick="document.getElementById('url-input').focus();window.scrollTo({top:0,behavior:'smooth'})">Kick a site ↗</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="hero-section">
-  <div class="badge"><div class="badge-dot"></div>AI-powered website critic</div>
-  <h1>Your site has<br><em>blind spots.</em><br>We don't.</h1>
-  <p class="hero-sub">Paste any product URL and get a brutally honest, actionable critique in seconds — design, copy, UX, and conversion.</p>
-  <div class="input-wrap">
+  <div class="hero-tag"><div class="tag-dot"></div>AI-powered website critic</div>
+  <h1>Your site has<br><span class="hl">blind spots.</span><br>We don't.</h1>
+  <p class="hero-desc">Paste any product URL and get a brutally honest, actionable critique in under 15 seconds — design, copy, UX, and conversion readiness. No fluff.</p>
+
+  <div class="input-row">
     <span class="url-pfx">https://</span>
     <input type="text" id="url-input" placeholder="yourproduct.com" autocomplete="off" spellcheck="false">
-    <button class="kick-btn" id="kick-btn" onclick="startScan()">Kick It ↗</button>
+    <button class="scan-btn" id="scan-btn" onclick="startScan()">Kick It ↗</button>
   </div>
-  <p class="hint">Free &middot; No signup &middot; 3 scans/day</p>
-  <div class="proof">
-    <div class="proof-item"><span class="proof-num">2,400+</span>&nbsp;sites kicked</div>
-    <div class="proof-sep"></div>
-    <div class="proof-item"><span class="proof-num">4.8 ★</span>&nbsp;avg rating</div>
-    <div class="proof-sep"></div>
-    <div class="proof-item"><span class="proof-num">&lt;15s</span>&nbsp;per report</div>
+  <div class="input-meta">
+    <span>Free &middot; No signup required</span>
+    <span>3 free scans/day</span>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-n yellow">2,400+</div>
+      <div class="stat-l">Sites reviewed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">4.8 ★</div>
+      <div class="stat-l">Avg. founder rating</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n yellow">&lt; 15s</div>
+      <div class="stat-l">Time to report</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">47%</div>
+      <div class="stat-l">Avg. score lift after fixes</div>
+    </div>
   </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">First Impression</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Copy & Messaging</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Design & UX</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Conversion Readiness</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Mobile Experience</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Trust Signals</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">CTA Clarity</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Value Proposition</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">First Impression</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Copy & Messaging</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Design & UX</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Conversion Readiness</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Mobile Experience</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Trust Signals</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">CTA Clarity</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item">Value Proposition</span><span class="marquee-dot yellow">✦</span>
+  </div>
+</div>
+
 <!-- LOADING -->
 <div id="loading">
-  <div class="loader-ring"></div>
-  <div class="loader-title">Kicking your site...</div>
-  <div class="loader-sub">Analyzing design, copy, UX &amp; conversion</div>
-  <div class="step-item active" id="s1"><div class="sdot"></div>Fetching website content</div>
-  <div class="step-item" id="s2"><div class="sdot"></div>Capturing screenshot</div>
-  <div class="step-item" id="s3"><div class="sdot"></div>Running AI analysis</div>
-  <div class="step-item" id="s4"><div class="sdot"></div>Writing your report</div>
+  <div class="spin-ring"></div>
+  <div class="load-title">Kicking your site...</div>
+  <div class="load-sub">Give us a sec. We're being thorough.</div>
+  <div class="step-row on" id="s1"><div class="sdot"></div>Fetching website content</div>
+  <div class="step-row" id="s2"><div class="sdot"></div>Capturing visual screenshot</div>
+  <div class="step-row" id="s3"><div class="sdot"></div>Running AI analysis</div>
+  <div class="step-row" id="s4"><div class="sdot"></div>Generating your report</div>
 </div>
 
 <!-- RESULTS -->
 <div id="results">
-  <div class="res-header">
-    <div class="res-url">Reviewed:&nbsp;<a id="res-url-link" href="#" target="_blank"></a></div>
-    <div class="verdict-h" id="verdict-h"></div>
-    <div class="verdict-s" id="verdict-s"></div>
+  <div style="margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid var(--border)">
+    <div class="res-eyebrow">Reviewed: <a id="res-link" href="#" target="_blank"></a></div>
+    <div class="res-h" id="res-h"></div>
+    <div class="res-sub" id="res-sub"></div>
   </div>
-  <div class="overall-card">
+
+  <div class="overall">
     <div>
-      <div class="overall-lbl">Overall score</div>
-      <div class="overall-n" id="overall-n"></div>
-      <div style="font-size:12px;color:var(--muted)">/10</div>
+      <div class="ov-label">Overall score</div>
+      <div class="ov-score" id="ov-score"></div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px">/10</div>
     </div>
-    <div class="overall-meta">
-      <div class="bar-track"><div class="bar-fill" id="overall-bar" style="width:0%"></div></div>
-      <div class="overall-txt" id="overall-txt"></div>
+    <div class="ov-right">
+      <div class="ov-bar"><div class="ov-fill" id="ov-fill" style="width:0%"></div></div>
+      <div class="ov-desc" id="ov-desc"></div>
     </div>
   </div>
+
   <div class="score-grid" id="score-grid"></div>
-  <div id="section-details"></div>
-  <div class="fixes-lbl">Top priorities to fix</div>
-  <div id="fixes-list"></div>
-  <div class="share-bar">
-    <span class="share-lbl">Share this roast</span>
-    <button class="share-btn" onclick="copyLink(this)">Copy link</button>
-    <button class="rescan-btn" onclick="resetScan()">Scan another ↗</button>
+  <div id="sections"></div>
+
+  <div class="fixes-head">Top 3 priorities to fix now</div>
+  <div id="fixes"></div>
+
+  <div class="bottom-bar">
+    <span class="bottom-label">Share this roast with your team</span>
+    <button class="btn-ghost" onclick="copyLink(this)">Copy link</button>
+    <button class="btn-accent" onclick="resetScan()">Scan another ↗</button>
   </div>
 </div>
 
 <!-- HOW IT WORKS -->
 <section class="how" id="how">
-  <div class="how-lbl">The process</div>
-  <div class="how-title">Brutal feedback,<br>fast.</div>
-  <div class="steps-row">
-    <div class="step"><div class="step-n">01</div><div class="step-t">Drop a URL</div><div class="step-d">Any product landing page, SaaS homepage, or portfolio. Just paste and go.</div></div>
-    <div class="step"><div class="step-n">02</div><div class="step-t">AI scans it</div><div class="step-d">We screenshot and analyze copy, design, UX, and conversion signals.</div></div>
-    <div class="step"><div class="step-n">03</div><div class="step-t">Get the truth</div><div class="step-d">Scored report with specific, actionable fixes. No fluff, no flattery.</div></div>
-    <div class="step"><div class="step-n">04</div><div class="step-t">Ship better</div><div class="step-d">Fix what matters most. Rescan to track your improvement over time.</div></div>
+  <div class="section-label">The process</div>
+  <div class="how-title">Four steps to<br><span class="yellow">the truth.</span></div>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-title">Drop a URL</div>
+      <div class="step-desc">Any product landing page, SaaS homepage, or portfolio site. Just paste and go — no account needed.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-title">AI scans it</div>
+      <div class="step-desc">We screenshot and extract content from your site, then feed it to our AI critic with battle-tested criteria.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-title">Get the truth</div>
+      <div class="step-desc">Scored report across 4 dimensions with specific, actionable fixes. No generic tips. No flattery.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-title">Ship better</div>
+      <div class="step-desc">Apply the fixes, rescan to track improvement. Watch your conversion score climb.</div>
+    </div>
   </div>
 </section>
 
+<!-- WHAT WE CHECK -->
+<section class="checks" id="checks">
+  <div class="section-label">What we review</div>
+  <div class="how-title">We check<br><span class="yellow">everything.</span></div>
+  <div class="checks-grid">
+    <div class="check-card">
+      <div class="check-icon">⚡</div>
+      <div class="check-title">First impression</div>
+      <div class="check-desc">Does a stranger understand what you do in the first 5 seconds? We test clarity, headline strength, and whether your value prop lands immediately — before a visitor even scrolls.</div>
+      <div class="check-score-ex"><span class="ex-n yellow">7</span>/10 avg score</div>
+    </div>
+    <div class="check-card">
+      <div class="check-icon">✍️</div>
+      <div class="check-title">Copy & messaging</div>
+      <div class="check-desc">Is your copy features-first or benefits-first? Does it speak to your ideal customer's actual pain? We flag generic filler, weak CTAs, and buried differentiators.</div>
+      <div class="check-score-ex"><span class="ex-n red">5</span>/10 avg score</div>
+    </div>
+    <div class="check-card">
+      <div class="check-icon">🎨</div>
+      <div class="check-title">Design & UX</div>
+      <div class="check-desc">Visual hierarchy, whitespace, readability, mobile responsiveness, and consistency. We assess whether your design builds trust or introduces friction before a visitor converts.</div>
+      <div class="check-score-ex"><span class="ex-n" style="color:#22c55e">8</span>/10 avg score</div>
+    </div>
+    <div class="check-card">
+      <div class="check-icon">📈</div>
+      <div class="check-title">Conversion readiness</div>
+      <div class="check-desc">CTA placement, social proof, trust signals, friction points, and pricing clarity. This is the section most founders fail — and it's where real money is left on the table.</div>
+      <div class="check-score-ex"><span class="ex-n orange">6</span>/10 avg score</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="section-label">What founders say</div>
+  <div class="how-title">Real feedback<br><span class="yellow">from real users.</span></div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-text">"HypeKick told me in 15 seconds what I'd been blind to for 3 months. My CTA was competing with itself. Fixed it, conversions up 28% in two weeks."</div>
+      <div class="testi-author">
+        <div class="testi-av" style="background:#1a2a1a;color:#22c55e">AK</div>
+        <div><div class="testi-name">Amir K.</div><div class="testi-role">Founder, Taskflow</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-text">"The copy score hurt to read. But it was 100% accurate — I was writing for myself, not my customer. Complete rewrite. Night and day difference."</div>
+      <div class="testi-author">
+        <div class="testi-av" style="background:#2a1a1a;color:#ff8800">SR</div>
+        <div><div class="testi-name">Sofia R.</div><div class="testi-role">Co-founder, Lendr</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-text">"I sent this to my whole team. It became the foundation of our landing page sprint. Brutal, specific, and right. This is exactly what early-stage founders need."</div>
+      <div class="testi-author">
+        <div class="testi-av" style="background:#1a1a2a;color:var(--accent)">JM</div>
+        <div><div class="testi-name">Jake M.</div><div class="testi-role">CEO, Patchwork</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-label">Questions</div>
+  <div class="how-title" style="margin-bottom:32px">The obvious ones,<br><span class="yellow">answered.</span></div>
+
+  <div class="faq-item open">
+    <div class="faq-q" onclick="toggleFaq(this)">How does the AI actually analyze my site? <em class="arrow">+</em></div>
+    <div class="faq-a">We take a full screenshot of your URL and extract the text content. Both are sent to our AI critic, which evaluates your site across four dimensions using criteria built from hundreds of high-converting product pages. The AI looks at what a real, skeptical visitor would see — not just aesthetics.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Does it work on single-page apps and React sites? <em class="arrow">+</em></div>
+    <div class="faq-a">Yes. We use a headless browser to fully render JavaScript-heavy sites before capturing content. SPAs, React, Vue, Next.js — all supported.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How many free scans do I get? <em class="arrow">+</em></div>
+    <div class="faq-a">3 free scans per day, no signup required. If you need more, Pro gives you unlimited scans, deeper analysis, PDF exports, and rescan history so you can track improvement over time.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">How is this different from Google Lighthouse or PageSpeed? <em class="arrow">+</em></div>
+    <div class="faq-a">Lighthouse measures technical performance — load speed, accessibility scores, Core Web Vitals. HypeKick measures persuasion — whether your site actually makes a visitor want to sign up or buy. Totally different job.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Is my site data stored or shared? <em class="arrow">+</em></div>
+    <div class="faq-a">We capture a screenshot and content snapshot to generate your report. We don't store or share your site's data beyond what's needed to produce the analysis. Reports are private to you unless you choose to share a link.</div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section class="cta-section">
+  <div class="cta-title">Ready to get<br><span class="yellow">kicked?</span></div>
+  <p class="cta-sub">It's free, it's fast, and it'll probably hurt a little.<br>That's the point.</p>
+  <div class="cta-input-row">
+    <span class="url-pfx" style="color:var(--muted2);font-size:13px">https://</span>
+    <input type="text" class="cta-input" id="cta-input" placeholder="yourproduct.com" autocomplete="off" spellcheck="false">
+    <button class="scan-btn" onclick="startScanFrom('cta-input')">Kick It ↗</button>
+  </div>
+  <div style="font-size:12px;color:var(--muted2)">Free · No signup · Results in 15 seconds</div>
+</section>
+
 <footer>
-  <div class="footer-logo">hype<span>kick</span>.fun</div>
-  <div class="footer-copy">&copy; 2025 HypeKick &middot; Built with brutality and love</div>
+  <div class="footer-logo">hype<span class="footer-kick">kick</span>.fun</div>
+  <div class="footer-links">
+    <a href="#how">How it works</a>
+    <a href="#checks">What we check</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </div>
+  <div class="footer-copy">&copy; 2025 HypeKick. Built for founders who want the truth.</div>
 </footer>
 
 <script>
-const MOCK = {
-  headline:"Almost there — but not quite converting.",
-  sub:"This site has a genuinely great product behind it, but the homepage plays it too safe. The hero doesn't punch hard enough, and the conversion path has unnecessary friction. Here's the real picture.",
+const MOCK={
+  headline:"Almost there — but leaking conversions.",
+  sub:"This site has a strong visual foundation, but the copy plays it too safe and the conversion path has unnecessary friction. Here's the unfiltered breakdown across all four dimensions.",
   overall:7,
-  overallTxt:"Solid foundation, weak first impression. You're leaving conversions on the table with vague copy and a buried CTA.",
+  ovDesc:"Solid design, weak persuasion. You're leaving conversions on the table with vague messaging and a diluted CTA above the fold.",
   scores:[
-    {label:"First impression",score:6,color:"amber"},
+    {label:"First impression",score:6,color:"orange"},
     {label:"Copy & messaging",score:5,color:"red"},
     {label:"Design & UX",score:9,color:"green"},
-    {label:"Conversion",score:6,color:"amber"}
+    {label:"Conversion",score:6,color:"orange"}
   ],
   sections:[
-    {title:"First impression",score:6,color:"amber",body:"Within 5 seconds, a visitor doesn't immediately grasp why this beats the competition. The hero headline is clever but cryptic — it appeals to existing users, not skeptics. You need to address the pain, not the pleasure."},
-    {title:"Copy & messaging",score:5,color:"red",body:"Feature-led copy throughout. 'Blazing fast' and 'built for modern teams' are table stakes — every competitor says this. Your unique differentiator is buried in the third scroll. Lead with the thing that makes you different."},
-    {title:"Design & UX",score:9,color:"green",body:"Genuinely excellent. Clean typographic hierarchy, confident use of space, and consistent spacing throughout. Product screenshots are well-chosen and load fast. One of the better-designed homepages out there. Minor nit: mobile CTA is too small."},
-    {title:"Conversion readiness",score:6,color:"amber",body:"Two competing CTAs above the fold dilutes focus. 'Start for free' and 'Request demo' fight each other — pick one primary. Social proof is present but not prominent enough. Move logos above the fold. Pricing link is invisible in the nav."}
+    {title:"First impression",score:6,color:"orange",body:"Within 5 seconds, a new visitor can't immediately grasp what makes this different from competitors. The hero headline is clever but cryptic — it resonates with users who already know the product, not skeptics encountering it for the first time. Lead with the pain you solve, not the experience of using you."},
+    {title:"Copy & messaging",score:5,color:"red",body:"Feature-led copy throughout. Phrases like 'blazing fast' and 'built for modern teams' are table stakes — every competitor says this. The actual differentiator is buried after the third scroll. Invert this: your most unique claim should be your headline, not a footnote."},
+    {title:"Design & UX",score:9,color:"green",body:"Genuinely excellent. Clean typographic hierarchy, confident spatial composition, and consistent component language throughout. The product screenshots are well-chosen and load fast. One of the better-designed SaaS homepages reviewed this month. Minor note: mobile CTA button is undersized at 32px tap target."},
+    {title:"Conversion readiness",score:6,color:"orange",body:"Two competing CTAs above the fold dilutes decision-making. 'Start for free' and 'Request demo' pull in different directions — pick one primary action and make it unmissable. Social proof logos are present but positioned too low. Moving them above the fold alone typically lifts conversion 8–15%."}
   ],
   fixes:[
-    "Rewrite the hero headline to address a specific pain point — not the joy of using your product.",
-    "Remove the secondary CTA from the hero. One call-to-action wins. Make 'Start for free' the only option above the fold.",
-    "Surface your biggest differentiator in the first 300px of content, not after 3 scrolls."
+    "Rewrite the hero headline to name a specific pain point your target customer loses sleep over. Not the joy of using your product — the cost of not having it.",
+    "Remove the secondary CTA from the hero entirely. One primary action above the fold wins every A/B test. Send demo-curious visitors to a dedicated page from the nav.",
+    "Move your customer logos or social proof above the fold, directly below the headline. Credibility before features is the single highest-leverage conversion change on this page."
   ]
 };
 
-function scoreColor(s){
-  if(s>=8)return{cls:'c-green',bg:'bg-green'};
-  if(s>=6)return{cls:'c-amber',bg:'bg-amber'};
-  return{cls:'c-red',bg:'bg-red'};
+function sc(score){
+  if(score>=8)return{cls:'green-c',bg:'bg-green'};
+  if(score>=6)return{cls:'orange',bg:'bg-orange'};
+  return{cls:'red',bg:'bg-red'};
+}
+
+function startScanFrom(inputId){
+  const v=document.getElementById(inputId).value.trim();
+  if(v) document.getElementById('url-input').value=v;
+  startScan();
 }
 
 function startScan(){
   const raw=document.getElementById('url-input').value.trim();
   if(!raw){
     document.getElementById('url-input').focus();
-    const wrap=document.querySelector('.input-wrap');
-    wrap.style.borderColor='var(--red)';
-    setTimeout(()=>wrap.style.borderColor='',1400);
+    const r=document.querySelector('.input-row');
+    r.style.borderColor='#ff4444';
+    setTimeout(()=>r.style.borderColor='',1400);
     return;
   }
   document.getElementById('hero-section').style.display='none';
   document.getElementById('loading').style.display='block';
   document.getElementById('results').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
 
   const ids=['s1','s2','s3','s4'];
-  const starts=[0,2600,5200,9000];
-  const ends=[2200,4800,8600,13200];
-
+  const starts=[0,2800,5400,9200];
+  const ends=[2400,5000,8800,13600];
   ids.forEach((id,i)=>{
-    setTimeout(()=>{
-      ids.forEach(x=>document.getElementById(x).classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    },starts[i]);
+    setTimeout(()=>{ids.forEach(x=>document.getElementById(x).classList.remove('on'));document.getElementById(id).classList.add('on');},starts[i]);
     setTimeout(()=>{
       const el=document.getElementById(id);
-      el.classList.remove('active');
-      el.classList.add('done');
+      el.classList.remove('on');el.classList.add('ok');
       if(i===ids.length-1) showResults(raw);
     },ends[i]);
   });
@@ -273,50 +595,46 @@ function showResults(rawUrl){
   window.scrollTo({top:0,behavior:'smooth'});
 
   const clean=rawUrl.replace(/^https?:\/\//,'').replace(/\/$/,'');
-  const link=document.getElementById('res-url-link');
-  link.textContent=clean;
-  link.href='https://'+clean;
+  const lnk=document.getElementById('res-link');
+  lnk.textContent=clean;lnk.href='https://'+clean;
 
-  document.getElementById('verdict-h').textContent=MOCK.headline;
-  document.getElementById('verdict-s').textContent=MOCK.sub;
+  document.getElementById('res-h').textContent=MOCK.headline;
+  document.getElementById('res-sub').textContent=MOCK.sub;
 
-  const oc=scoreColor(MOCK.overall);
-  const on=document.getElementById('overall-n');
-  on.textContent=MOCK.overall;
-  on.className='overall-n '+oc.cls;
-  document.getElementById('overall-txt').textContent=MOCK.overallTxt;
-  const ob=document.getElementById('overall-bar');
-  ob.className='bar-fill '+oc.bg;
-  setTimeout(()=>ob.style.width=(MOCK.overall*10)+'%',120);
+  const oc=sc(MOCK.overall);
+  const on=document.getElementById('ov-score');
+  on.textContent=MOCK.overall;on.className='ov-score '+oc.cls;
+  document.getElementById('ov-desc').textContent=MOCK.ovDesc;
+  const of=document.getElementById('ov-fill');
+  of.className='ov-fill '+oc.bg;
+  setTimeout(()=>of.style.width=(MOCK.overall*10)+'%',100);
 
   const sg=document.getElementById('score-grid');
   sg.innerHTML='';
   MOCK.scores.forEach(s=>{
-    const c=scoreColor(s.score);
+    const c=sc(s.score);
     const d=document.createElement('div');
-    d.className='score-card';
-    d.innerHTML='<div class="sc-lbl">'+s.label+'</div><div class="sc-val '+c.cls+'">'+s.score+'<span>/10</span></div><div class="bar-track"><div class="bar-fill '+c.bg+'" style="width:0%" data-w="'+(s.score*10)+'%"></div></div>';
+    d.className='sc';
+    d.innerHTML='<div class="sc-lbl">'+s.label+'</div><div class="sc-n '+c.cls+'">'+s.score+'<span class="sc-ten">/10</span></div><div class="sc-bar"><div class="sc-fill '+c.bg+'" style="width:0%" data-w="'+(s.score*10)+'%"></div></div>';
     sg.appendChild(d);
   });
-  setTimeout(()=>{
-    document.querySelectorAll('.bar-fill[data-w]').forEach(el=>el.style.width=el.getAttribute('data-w'));
-  },200);
+  setTimeout(()=>document.querySelectorAll('.sc-fill[data-w]').forEach(el=>el.style.width=el.getAttribute('data-w')),180);
 
-  const sd=document.getElementById('section-details');
+  const sd=document.getElementById('sections');
   sd.innerHTML='';
   MOCK.sections.forEach(s=>{
-    const c=scoreColor(s.score);
+    const c=sc(s.score);
     const d=document.createElement('div');
-    d.className='sec';
-    d.innerHTML='<div class="sec-hdr"><div class="sec-title">'+s.title+'</div><div class="sec-score '+c.cls+'">'+s.score+'/10</div></div><div class="sec-body">'+s.body+'</div>';
+    d.className='section-block';
+    d.innerHTML='<div class="sb-head"><div class="sb-title">'+s.title+'</div><div class="sb-score '+c.cls+'">'+s.score+'/10</div></div><div class="sb-body">'+s.body+'</div>';
     sd.appendChild(d);
   });
 
-  const fl=document.getElementById('fixes-list');
+  const fl=document.getElementById('fixes');
   fl.innerHTML='';
   MOCK.fixes.forEach((f,i)=>{
     const d=document.createElement('div');
-    d.className='fix-item';
+    d.className='fix';
     d.innerHTML='<span class="fix-n">0'+(i+1)+'</span><span>'+f+'</span>';
     fl.appendChild(d);
   });
@@ -329,9 +647,9 @@ function resetScan(){
   document.getElementById('url-input').value='';
   ['s1','s2','s3','s4'].forEach(id=>{
     const el=document.getElementById(id);
-    el.classList.remove('active','done');
+    el.classList.remove('on','ok');
   });
-  document.getElementById('s1').classList.add('active');
+  document.getElementById('s1').classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -342,9 +660,15 @@ function copyLink(btn){
   });
 }
 
-document.getElementById('url-input').addEventListener('keydown',e=>{
-  if(e.key==='Enter') startScan();
-});
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+
+document.getElementById('url-input').addEventListener('keydown',e=>{if(e.key==='Enter')startScan()});
+document.getElementById('cta-input').addEventListener('keydown',e=>{if(e.key==='Enter')startScanFrom('cta-input')});
 </script>
 </body>
 </html>
