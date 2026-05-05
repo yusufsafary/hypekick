@@ -117,8 +117,12 @@ h1 .hl{color:var(--accent)}
 
 /* MARQUEE */
 .marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;margin-top:0;white-space:nowrap}
-.marquee-track{display:inline-block;animation:scroll 22s linear infinite}
+.marquee-track{display:inline-block;animation:scroll 32s linear infinite}
 .marquee-item{display:inline-block;padding:0 32px;font-size:13px;color:var(--muted);font-weight:500;letter-spacing:0.2px}
+.marquee-item a{color:var(--muted);transition:color 0.15s}
+.marquee-item a:hover{color:var(--accent)}
+.marquee-item.featured{color:var(--accent);font-weight:600}
+.marquee-item.featured a{color:var(--accent)}
 .marquee-dot{color:var(--accent);margin-right:32px}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -327,17 +331,21 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-i
     <span class="marquee-item">Design & UX</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Conversion Readiness</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Mobile Experience</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item featured">🐦 Follow us <a href="https://x.com/hypekickfun" target="_blank" rel="noopener">@hypekickfun</a></span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Trust Signals</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">CTA Clarity</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Value Proposition</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item featured">🚀 $HYPE — Featured on <a href="https://kickstart.easya.io/" target="_blank" rel="noopener">EasyA Launchpad</a></span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">First Impression</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Copy & Messaging</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Design & UX</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Conversion Readiness</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Mobile Experience</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item featured">🐦 Follow us <a href="https://x.com/hypekickfun" target="_blank" rel="noopener">@hypekickfun</a></span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Trust Signals</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">CTA Clarity</span><span class="marquee-dot yellow">✦</span>
     <span class="marquee-item">Value Proposition</span><span class="marquee-dot yellow">✦</span>
+    <span class="marquee-item featured">🚀 $HYPE — Featured on <a href="https://kickstart.easya.io/" target="_blank" rel="noopener">EasyA Launchpad</a></span><span class="marquee-dot yellow">✦</span>
   </div>
 </div>
 
@@ -518,6 +526,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-i
   <div class="footer-links">
     <a href="#how">How it works</a>
     <a href="#checks">What we check</a>
+    <a href="https://x.com/hypekickfun" target="_blank" rel="noopener">X / Twitter</a>
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
   </div>
